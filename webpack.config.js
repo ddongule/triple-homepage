@@ -1,22 +1,22 @@
-const path = require("path");
+const path = require('path')
 
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 module.exports = (options) => {
-  const { development } = options;
-  const isDevMode = development === "development";
+  const { development } = options
+  const isDevMode = development === 'development'
 
   const config = {
-    entry: "./src/index.js",
+    entry: './src/index.js',
 
-    devtool: isDevMode ? "inline-source-map" : false,
+    devtool: isDevMode ? 'inline-source-map' : false,
 
     output: {
-      path: path.resolve(__dirname, "public"),
-      filename: "[name].js",
+      path: path.resolve(__dirname, 'public'),
+      filename: '[name].js',
       clean: true,
-      publicPath: "/",
+      publicPath: '/',
     },
 
     devServer: {
@@ -31,34 +31,38 @@ module.exports = (options) => {
         {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
-          use: ["babel-loader"],
+          use: ['babel-loader'],
         },
         {
           test: /\.(css|scss|sass)$/,
-          use: ["style-loader", "css-loader", "sass-loader"],
+          use: ['style-loader', 'css-loader', 'sass-loader'],
         },
         {
           test: /\.(woff2|woff|ttf)$/i,
-          type: "asset/resource",
+          type: 'asset/resource',
           generator: {
-            filename: "fonts/[name][ext]",
+            filename: 'fonts/[name][ext]',
           },
+        },
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/resource',
         },
       ],
     },
 
     optimization: {
       minimize: true,
-      splitChunks: { chunks: "all" },
-      minimizer: ["...", new CssMinimizerPlugin()],
+      splitChunks: { chunks: 'all' },
+      minimizer: ['...', new CssMinimizerPlugin()],
     },
 
     performance: {
       hints: false,
     },
 
-    plugins: [new HtmlWebpackPlugin({ template: "./index.html" })],
-  };
+    plugins: [new HtmlWebpackPlugin({ template: './index.html' })],
+  }
 
-  return config;
-};
+  return config
+}
