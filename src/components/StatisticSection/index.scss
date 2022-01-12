@@ -1,0 +1,47 @@
+.statistics-wrapper {
+  display: flex;
+  min-width: 1200px;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+
+  .content-logo {
+    width: 400px;
+    height: 338px;
+    animation: fadeInUp 700ms;
+  }
+
+  .awards-details {
+    display: block;
+
+    .info {
+      display: block;
+      animation: fadeInUp 700ms;
+      animation-delay: 100ms;
+    }
+
+    .details {
+      display: flex;
+      animation: fadeInUp 700ms;
+      animation-delay: 200ms;
+    }
+
+    .image-wrapper:not(:last-child) {
+      margin-right: 39px;
+    }
+
+    img {
+      width: 54px;
+    }
+
+    .image-information {
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--gray-100);
+    }
+
+    .emphasis-text {
+      font-size: inherit;
+    }
+  }
+}

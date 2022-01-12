@@ -1,8 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+import Home from './pages/Home'
+import './styles/global.scss'
 
 const App = () => {
-  return <div>Hello World!</div>;
-};
+  return <Home />
+}
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById('root'))
