@@ -1,5 +1,8 @@
 # Triple Assignment
 
+### Preview
+![Jan-13-2022 01-42-57](https://user-images.githubusercontent.com/26598561/149183627-71631be1-76fc-4efc-ac17-100cb198d366.gif)
+
 ### 1. 프로젝트 실행
 
 ```bash
