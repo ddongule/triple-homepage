@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 
 import { COUNTER } from '../constants/counter'
-import { getSumOfIntervals, getTimeIncrement } from '../utils/times'
+import { easeOut } from '../utils/animations'
 
-const useNumberAnimation = (ref, emphasisText) => {
+const useNumberAnimation = (emphasisText) => {
   const targetNumber = parseInt(emphasisText)
 
   const [highLightText, setHighLightText] = useState(
@@ -16,32 +16,31 @@ const useNumberAnimation = (ref, emphasisText) => {
     }
 
     let timer
+
     const restTexts = emphasisText.slice(`${targetNumber}`.length)
-    const sumOfInterval = getSumOfIntervals(targetNumber)
-    const timeIncrement = getTimeIncrement(targetNumber, sumOfInterval)
+    const startTime = Date.now()
 
-    const updateCounter = (duration) => {
-      const currentNumber = parseInt(ref.current.innerText)
+    const updateCounter = () => {
+      const now = Date.now()
 
-      if (currentNumber < targetNumber) {
-        duration *= COUNTER.SQUARED_TIME
-
-        const NEW_NUMBER = currentNumber + COUNTER.INCREMENT
-
-        setHighLightText(
-          `${
-            targetNumber < NEW_NUMBER ? targetNumber : NEW_NUMBER
-          }${restTexts}`,
+      if (now - startTime < COUNTER.DURATION) {
+        const newCount = easeOut(
+          now - startTime,
+          COUNTER.DEFAULT,
+          targetNumber,
+          COUNTER.DURATION,
         )
+
+        setHighLightText(`${newCount}${restTexts}`)
       }
 
-      timer = setTimeout(() => updateCounter(duration), duration)
+      timer = setTimeout(updateCounter, 0)
     }
 
-    updateCounter(timeIncrement)
+    updateCounter()
 
     return () => clearTimeout(timer)
-  }, [targetNumber, ref])
+  }, [emphasisText, targetNumber])
 
   return { highLightText }
 }

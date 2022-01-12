@@ -7,7 +7,7 @@ import './index.scss'
 const InfoText = ({ emphasisText, contents }) => {
   const emphasisRef = useRef(null)
 
-  const { highLightText } = useNumberAnimation(emphasisRef, emphasisText)
+  const { highLightText } = useNumberAnimation(emphasisText)
 
   return (
     <div className="info-text-wrapper">

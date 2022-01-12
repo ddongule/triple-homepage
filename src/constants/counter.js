@@ -1,8 +1,5 @@
 export const COUNTER = {
   DEFAULT: 0,
-  INCREMENT: 1,
-  RATIO: 2,
-  START_RATE: 0.75,
-  SQUARED_TIME: 1.98,
+  START_RATE: 0,
   DURATION: 2000,
 }
