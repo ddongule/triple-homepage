@@ -1,4 +1,4 @@
-import { COUNTER } from '../components/constants/counter'
+import { COUNTER } from '../constants/counter'
 
 const getInterval = (targetNumber) => {
   return parseInt(targetNumber - targetNumber * COUNTER.START_RATE) - 1
