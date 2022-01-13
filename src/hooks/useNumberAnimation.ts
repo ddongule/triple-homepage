@@ -3,19 +3,19 @@ import { useEffect, useState } from 'react'
 import { COUNTER } from '../constants/counter'
 import { easeOut } from '../utils/animations'
 
-const useNumberAnimation = (emphasisText) => {
+const useNumberAnimation = (emphasisText: string) => {
   const targetNumber = parseInt(emphasisText)
 
-  const [highLightText, setHighLightText] = useState(
-    parseInt(targetNumber * COUNTER.START_RATE),
+  const [highLightText, setHighLightText] = useState<string>(
+    `${Number(targetNumber * COUNTER.startRate)}`,
   )
 
   useEffect(() => {
-    if (COUNTER.DEFAULT === targetNumber) {
+    if (COUNTER.default === targetNumber) {
       return
     }
 
-    let timer
+    let timerId: number | null = null
 
     const restTexts = emphasisText.slice(`${targetNumber}`.length)
     const startTime = Date.now()
@@ -23,23 +23,23 @@ const useNumberAnimation = (emphasisText) => {
     const updateCounter = () => {
       const now = Date.now()
 
-      if (now - startTime < COUNTER.DURATION) {
+      if (now - startTime < COUNTER.duration) {
         const newCount = easeOut(
           now - startTime,
-          COUNTER.DEFAULT,
+          COUNTER.default,
           targetNumber,
-          COUNTER.DURATION,
+          COUNTER.duration,
         )
 
         setHighLightText(`${newCount}${restTexts}`)
       }
 
-      timer = setTimeout(updateCounter, 0)
+      timerId = window.setTimeout(updateCounter, 0)
     }
 
     updateCounter()
 
-    return () => clearTimeout(timer)
+    return () => clearTimeout(timerId || -1)
   }, [emphasisText, targetNumber])
 
   return { highLightText }

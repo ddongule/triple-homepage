@@ -8,7 +8,8 @@ module.exports = (options) => {
   const isDevMode = development === 'development'
 
   const config = {
-    entry: './src/index.js',
+    entry: path.resolve('src', 'index.tsx'),
+    resolve: { extensions: ['.ts', '.tsx', '.js', '.jsx'] },
 
     devtool: isDevMode ? 'inline-source-map' : false,
 
@@ -29,9 +30,17 @@ module.exports = (options) => {
     module: {
       rules: [
         {
-          test: /\.(js|jsx)$/,
+          test: /\.(ts|tsx)$/,
           exclude: /node_modules/,
-          use: ['babel-loader'],
+          use: [
+            'babel-loader',
+            {
+              loader: 'ts-loader',
+              options: {
+                transpileOnly: true,
+              },
+            },
+          ],
         },
         {
           test: /\.(css|scss|sass)$/,
@@ -45,7 +54,7 @@ module.exports = (options) => {
           },
         },
         {
-          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          test: /\.(png|svg|jpe?g|gif)$/i,
           type: 'asset/resource',
         },
       ],

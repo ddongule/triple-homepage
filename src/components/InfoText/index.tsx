@@ -4,7 +4,12 @@ import useNumberAnimation from '../../hooks/useNumberAnimation'
 
 import './index.scss'
 
-const InfoText = ({ emphasisText, contents }) => {
+interface InfoTextType {
+  emphasisText: string
+  contents: string
+}
+
+const InfoText = ({ emphasisText, contents }: InfoTextType) => {
   const emphasisRef = useRef(null)
 
   const { highLightText } = useNumberAnimation(emphasisText)
